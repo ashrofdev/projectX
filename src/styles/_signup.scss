@@ -1,15 +1,16 @@
 .signup {
-    padding: 0;
-    background-color: black;
-    padding-bottom: 0;
+    padding-top: 5rem;
     height: 100vh;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.452), rgba(0, 0, 0, 0.479)), url('../img/ec1.jpg');
+    background-size: contain;
+    background-position: center;
 
     &  .form {
         width: 45rem;
         margin: auto;
         background-color: white;
         border-radius: .5rem;
-        box-shadow: 1px 1px 5px black;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.411);
         padding: 2rem 1rem;
 
         &  header {
@@ -41,7 +42,7 @@
                     height: .1rem;
                     background-color: $primary-purple;
                     z-index: 100000;
-                    transform: scaleX(1);
+                    transform: scaleX(0);
                     transform-origin: center;
 
                     

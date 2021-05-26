@@ -14,7 +14,8 @@ function App() {
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
           <Route path="/dashboard" component={Dashboard} />
-          <Route component={NotFound} />
+          {/* <Route path="/*" component={NotFound} /> */}
+          <Route path="/" component={Signin} />
         </Switch>
       </BrowserRouter>
     </div>
