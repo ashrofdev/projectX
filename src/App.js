@@ -4,7 +4,7 @@ import Dashboard from './routes/Dashboard';
 import Signin from './routes/Signin';
 import Signup from './routes/Signup';
 
-const NotFound = () => <h1>Page not found</h1>
+// const NotFound = () => <h1>Page not found</h1>
 
 function App() {
   return (
