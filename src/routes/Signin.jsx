@@ -25,7 +25,9 @@ const Signin = () => {
                         </div>
                     </div>
                     <div className="cta">
-                        <Btn text={"Sign In"} color={"white"} bgColor={"#933CEA"} />
+                        <NavLink to="/dashboard">
+                            <Btn text={"Sign In"} color={"white"} bgColor={"#933CEA"} />
+                        </NavLink>
                         <NavLink to="/signup">
                             <Btn text={"Register"} color={"white"} bgColor={"#933CEA"} />
                         </NavLink>
