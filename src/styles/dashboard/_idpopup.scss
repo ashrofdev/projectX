@@ -1,0 +1,46 @@
+.idpopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.336);
+    z-index: 1000;
+
+    &  .container {
+        background-color: #BBD6EC;
+        width: 60vw;
+        margin: auto;
+        height: 90vh;
+        padding-top: 3rem;
+
+        &  .box {
+            width: 30vw;
+            border-radius: .3rem;
+            height: 60vh;
+            position: relative;
+            margin: auto;
+            background-color: white;
+
+            &  header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem;
+
+                &  h4 {
+                    padding: .5rem;
+                    padding-right: 3rem;
+                    padding-left: 0;
+                    border-bottom: 3px solid #933CEA;
+                }
+            }
+    
+            // &  .close {
+            //     position: absolute;
+            //     top: 2rem;
+            //     right: 2rem;
+            // }
+        }
+    }
+}

@@ -18,18 +18,10 @@ function App() {
     firestore.collection('users').doc('NG783735').get().then(snap=> {
       console.log(snap.data())
     })
-    firestore.collection('users').doc('NG783735').set({
-      name: 'Ashraf',
-      userID: 'NG382234',
-      uplineID: 'NG838293',
-      downlines: {
-        left: 'erkjr',
-        right: 'jfnfr'
-      },
-      balance: 2000
-    }).then(e=> {
-      console.log(e,'done')
-    })
+    
+    const a = ['w','w','e']
+    a[100] ='a'
+    console.log(typeof(42))
   },[])
 
   return (
