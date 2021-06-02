@@ -41,21 +41,21 @@ export const checkAvailableUpline = async (upline, leg) => {
     return availableId
 }
 
-const creditLoop = async (id, leg) => {
+// const creditLoop = async (id, leg) => {
 
     
-    let upline = id
-    while (upline !== '') {
-        const user = await getUser(id)
+//     let upline = id
+//     while (upline !== '') {
+//         const user = await getUser(id)
 
-        if(leg==='left'){
-            addPoints(user.userId, leg, user.leftPoints+700)
-        }else{
-            addPoints(user.userId, leg, user.rightPoints+700)
-        }
+//         if(leg==='left'){
+//             addPoints(user.userId, leg, user.leftPoints+700)
+//         }else{
+//             addPoints(user.userId, leg, user.rightPoints+700)
+//         }
 
-    }
-}
+//     }
+// }
 
 export const signUp = async (data) => {
     let uplinePromise = getUser(data.uplineId)
