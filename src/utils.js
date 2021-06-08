@@ -23,6 +23,12 @@ export const addPoints = (id, leg, points) => {
     }
 }
 
+export const increaseBalance = (id, amount) => {
+    firestore.collection('users').doc(id).update({
+        balance: amount
+    })
+}
+
 export const checkAvailableUpline = async (upline, leg) => {
     let availableId = upline.userId
     let downline = upline.downlines[leg]
@@ -41,21 +47,46 @@ export const checkAvailableUpline = async (upline, leg) => {
     return availableId
 }
 
-// const creditLoop = async (id, leg) => {
+const creditLoop = async (id, leg) => {
 
-    
-//     let upline = id
-//     while (upline !== '') {
-//         const user = await getUser(id)
+    let upline = id
+    while (upline !== '') {
+        if(upline===''){
+            break
+        }
+        const user = await getUser(upline)
+        console.log(user, 'proceeding...')
 
-//         if(leg==='left'){
-//             addPoints(user.userId, leg, user.leftPoints+700)
-//         }else{
-//             addPoints(user.userId, leg, user.rightPoints+700)
-//         }
+        if(user===undefined){
+            break
+        }
 
-//     }
-// }
+        if(leg==='left'){
+            /// check for point on right
+            if(user.rightPoints>=700){
+                increaseBalance(user.userId, user.balance+7000)
+                addPoints(user.userId, 'right', user.rightPoints-700)
+            }else{
+                addPoints(user.userId, leg, user.leftPoints+700)
+            }
+            
+        }else{
+            /// check for point on right
+            if(user.leftPoints>=700){
+                increaseBalance(user.userId, user.balance+7000)
+                addPoints(user.userId, 'left', user.leftPoints-700)
+            }else{
+                addPoints(user.userId, leg, user.rightPoints+700)
+            }
+            
+        }
+
+        upline = user.uplineId
+        
+
+    }
+
+}
 
 export const signUp = async (data) => {
     let uplinePromise = getUser(data.uplineId)
@@ -80,11 +111,12 @@ export const signUp = async (data) => {
                 
                 console.log(e)
             })
+            creditLoop(e, data.leg)
         })
 
     })
   
-    // creditLoop(newUpline, data.leg)
+    // 
 
 
     

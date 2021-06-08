@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 const Signin = () => {
     return (
         <div className="signin">
-
             <Slide right>
                 <div className="form">
                     <header>

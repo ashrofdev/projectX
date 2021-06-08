@@ -5,7 +5,6 @@ import Home from './Home';
 const Content = () => {
     return (
         <div className="dashcontent">
-
             <Home/>
         </div>
     );
