@@ -1,0 +1,85 @@
+
+.cont{
+    
+    width: 100%;
+    margin: 40px 0px;
+
+    .text{
+        padding-top: 10px;
+       
+        margin:0px 35px;
+    }
+
+    .hr{
+        margin:10px 35px;
+        padding: 0.5px;
+        background-color: rgba(128, 128, 128, 0.295);
+        margin-bottom: 20px;
+    }
+    .hr1{
+        position: absolute;
+        padding: 2px;
+        width: 10%;
+        background-color:rgba(128, 0, 128, 0.767);
+    }
+
+
+    .left{
+        float: left;
+        background-color: white;
+        width: 38.5%;
+        margin-left: 10%;
+        margin-right: 1.5%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        padding-bottom: 30px;
+        padding-top: 1rem;
+        border-radius: 4px;
+        
+       
+    }
+    .right{
+        float: left;
+        padding-top: 1rem;
+        width: 38.5%;
+        margin-left: 2%;
+        margin-right: 1.5%;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        padding-bottom: 30px;
+        border-radius: 4px;
+     
+    }
+    
+
+    form{
+        display: grid;
+        margin:10px 35px;
+        label{
+            margin:10px 5px;
+        }
+        input,select{
+            padding:10px;
+            border: 1px solid rgba(179, 179, 179, 0.301);
+            border-radius: 5px;
+        }
+      select{
+          margin-top: 10px;
+      }
+  
+   
+    }
+    #clearf{
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .btn{
+        padding:10px 13px;
+        border: 1px solid rgba(179, 179, 179, 0.301);
+        border-radius: 5px;
+        background-color: rgba(3, 18, 226, 0.877);
+        color: white;
+        margin:40px 10%;
+    }
+}

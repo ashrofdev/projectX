@@ -1,0 +1,141 @@
+
+.profile{
+    
+    width: 95%;
+    margin: auto;
+    margin-top: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 1rem 0;
+    border-radius: 4px;
+    .cont{
+        margin-top: 40px;
+    }
+
+    .text{
+        padding-top: 10px;
+       
+        margin:0px 35px;
+    }
+
+    .hr{
+        margin:10px 35px;
+        padding: 0.5px;
+        background-color: rgba(128, 128, 128, 0.295);
+        margin-bottom: 20px;
+    }
+    .hr1{
+        position: absolute;
+        padding: 2px;
+        width: 10%;
+        background-color:rgba(128, 0, 128, 0.767);
+    }
+
+
+    .left{
+        float: left;
+        background-color: white;
+        width: 45.5%;
+        margin-left: 3%;
+        margin-right: 1.5%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        padding-bottom: 30px;
+        border-radius: 4px;
+        form{
+          
+           
+            margin:1px 5%;
+        }
+        .inputcont{
+           float: left;
+            width: 48%;
+            margin: 1%;
+        }
+        label{
+            display: grid;
+            margin:10px 5px;
+           
+        }
+        #ss{
+            
+        }
+        input,select{
+            width: 100%;
+            padding:10px;
+            border: 1px solid rgba(184, 184, 184, 0.301);
+            border-radius: 5px;
+            
+        }
+        textarea{
+            width: 100%;
+            border: 1px solid rgba(184, 184, 184, 0.301);
+            border-radius: 5px;
+        }
+ 
+        
+        
+       
+    }
+    .right{
+        float: left;
+        width: 45.5%;
+        margin-right: 3%;
+        margin-left: 1.5%;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        padding-bottom: 30px;
+        border-radius: 4px;
+        form{
+            display: grid;
+            margin:10px 35px;
+            label{
+                margin:10px 5px;
+            }
+            input,select{
+                padding:10px;
+                border: 1px solid rgba(184, 184, 184, 0.301);
+                border-radius: 5px;
+            }
+          select{
+              margin-top: 10px;
+          }
+          textarea{
+            border: 1px solid rgba(184, 184, 184, 0.301);
+            border-radius: 5px;
+
+          }
+         
+       
+        }
+
+       
+    }
+    
+    .down{
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        padding-bottom: 30px;
+        border-radius: 4px;
+        width: 95%;
+        margin: auto;
+        input{
+            margin-left: 35px;
+           
+        }
+
+    }
+
+    #clearf{
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .btn{
+        padding:10px 13px;
+        border: 1px solid rgba(179, 179, 179, 0.301);
+        border-radius: 5px;
+        background-color: rgba(3, 181, 226, 0.877);
+        color: white;
+        margin:15px 91%;
+       
+    }
+}

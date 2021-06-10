@@ -88,32 +88,45 @@ const creditLoop = async (id, leg) => {
 
 }
 
+const placeReg = (data, upline) => {
+    data.uplineId = upline
+    console.log(data,"*")
+
+    firestore.collection('users').doc(data.userId).set({...data}).then(e=> {
+    
+        // adding dowwnline to upline
+        if(data.leg==='left'){
+            firestore.collection('users').doc(data.uplineId).update({
+                "downlines.left": data.userId
+            })
+        }else{
+            firestore.collection('users').doc(data.uplineId).update({
+                "downlines.right": data.userId
+            })
+        }
+        
+        console.log(e)
+    })
+    creditLoop(upline, data.leg)
+}
+
 export const signUp = async (data) => {
     let uplinePromise = getUser(data.uplineId)
     uplinePromise.then(e=> {
-        const newUpline = checkAvailableUpline(e, data.leg)
-        newUpline.then(e=> {
-            data.uplineId = e
-            console.log(data,"*")
+        console.log(e)
+        if(e===undefined){
 
-            firestore.collection('users').doc(data.userId).set({...data}).then(e=> {
-             
-                // adding dowwnline to upline
-                if(data.leg==='left'){
-                    firestore.collection('users').doc(data.uplineId).update({
-                        "downlines.left": data.userId
-                    })
-                }else{
-                    firestore.collection('users').doc(data.uplineId).update({
-                        "downlines.right": data.userId
-                    })
+        }else {
+            const newUpline = checkAvailableUpline(e, data.leg)
+            newUpline.then(e=> {
+                if(e===data.upline){
+                    placeReg(data, e)
+                }else {
+                    /// downline change process
                 }
-                
-                console.log(e)
             })
-            creditLoop(e, data.leg)
-        })
 
+        }
     })
   
     // 
