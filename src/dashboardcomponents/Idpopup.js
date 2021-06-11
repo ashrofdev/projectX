@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Idpopup = () => {
+const Idpopup = ({toggleAccounts}) => {
     return (
         <div className="idpopup">
             <div className="container">
@@ -8,7 +8,7 @@ const Idpopup = () => {
                     <header>
                         <h4>User IDs</h4>
 
-                        <div className="close">
+                        <div className="close" onClick={()=> toggleAccounts(false)}>
                             X
                         </div>
                     </header>

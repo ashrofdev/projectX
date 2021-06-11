@@ -5,7 +5,7 @@ const Profile = () => {
         <div className="profile">
             <div className="text">Profile Settings</div>
             <div className="hr"><div className="hr1"></div></div>
-            <div className="cont">
+            <div className="">
                 <div className="left">
                     <div className="text">Personal Information</div>
                     <div className="hr"><div className="hr1"></div></div>

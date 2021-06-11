@@ -5,8 +5,7 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.336);
-    z-index: 1000;
-    display: none;
+    z-index: 100;
 
     &  .container {
         background-color: #BBD6EC;
@@ -37,11 +36,9 @@
                 }
             }
     
-            // &  .close {
-            //     position: absolute;
-            //     top: 2rem;
-            //     right: 2rem;
-            // }
+            &  .close {
+                cursor: pointer;
+            }
         }
     }
 }
