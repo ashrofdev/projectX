@@ -68,23 +68,55 @@ const Home = () => {
                         </div>
                         <div className="detail">
                             <h4>Available Points (RIGHT)</h4>
-                            <p>Nigeria</p>
+                            <p>0</p>
                         </div>
                         <div className="detail">
-                            <h4>Country</h4>
-                            <p>Nigeria</p>
+                            <h4>Available Product GC (in pcs)</h4>
+                            <p>0</p>
                         </div>
                         <div className="detail">
-                            <h4>Country</h4>
-                            <p>Nigeria</p>
+                            <h4>Total Direct Ref. Earnings</h4>
+                            <p>0</p>
                         </div>
                         <div className="detail">
-                            <h4>Country</h4>
-                            <p>Nigeria</p>
+                            <h4>Total Pair Earnings</h4>
+                            <p>0</p>
                         </div>
                         <div className="detail">
-                            <h4>Country</h4>
-                            <p>Nigeria</p>
+                            <h4>Total Uni-level Earnings</h4>
+                            <p>0</p>
+                        </div>
+                        <div className="detail">
+                            <h4>Total Stair step Earnings</h4>
+                            <p>0</p>
+                        </div>
+                        <div className="detail">
+                            <h4>Total UPP Earnings</h4>
+                            <p>0</p>
+                        </div>
+                        <div className="detail">
+                            <h4>Current Total Earnings</h4>
+                            <p>0</p>
+                        </div>
+                        <div className="detail">
+                            <h4>Current Available Balance</h4>
+                            <p>0</p>
+                        </div>
+                        <div className="detail">
+                            <h4>Available Travel GC</h4>
+                            <p>0</p>
+                        </div>
+                        <div className="detail">
+                            <h4>Pairs This Cycle</h4>
+                            <p>0</p>
+                        </div>
+                        <div className="detail">
+                            <h4>Total Earnings of all Accounts</h4>
+                            <p>0</p>
+                        </div>
+                        <div className="detail">
+                            <h4>Total Balance of all Accounts</h4>
+                            <p>0</p>
                         </div>
 
 
