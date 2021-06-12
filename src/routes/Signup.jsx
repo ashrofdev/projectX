@@ -28,6 +28,9 @@ const Signup = () => {
         signUp(data)
     }
 
+    const resetForm = () => {
+        document.querySelector('form').reset()
+    }
     return (
         <div className="signup">
             <Slide right>
@@ -36,27 +39,29 @@ const Signup = () => {
                         <h2>Registration Form</h2>
                     </header>
                     <div className="inputs">
-                        <div className="inp"><input name="lastname" placeholder="Last Name"/></div>
-                        <div className="inp"><input name="firstname" placeholder="First Name"/></div>
-                        <div className="inp"><input name="middlename" placeholder="Middle Name"/></div>
-                        <div className="inp"><input name="birthdate" placeholder="Birthdate"/></div>
-                        <div className="inp"><input name="username" placeholder="Username"/></div>
-                        <div className="inp"><input name="sponsorId" placeholder="Sponsor ID"/></div>
-                        <div className="inp"><input name="uplineId" placeholder="Upline ID"/></div>
+                        <div className="inp"><input required name="lastname" placeholder="Last Name"/></div>
+                        <div className="inp"><input required name="firstname" placeholder="First Name"/></div>
+                        <div className="inp"><input required name="middlename" placeholder="Middle Name"/></div>
+                        <div className="inp"><input required name="birthdate" placeholder="Birthdate"/></div>
+                        <div className="inp"><input required name="username" placeholder="Username"/></div>
+                        <div className="inp"><input required name="sponsorId" placeholder="Sponsor ID"/></div>
+                        <div className="inp"><input required name="uplineId" placeholder="Upline ID"/></div>
                         <select name="leg">
                             <option value="">Select Position</option>
                             <option value="left">Left</option>
                             <option value="right">Right</option>
                         </select>
-                        <div className="inp"><input name="password" placeholder="Password"/></div>
-                        <div className="inp"><input name="cpassword" placeholder="Confirm Password"/></div>
+                        <div className="inp"><input required name="password" placeholder="Password"/></div>
+                        <div className="inp"><input required name="cpassword" placeholder="Confirm Password"/></div>
                         <h3>Activation Info</h3>
-                        <div className="inp"><input name="userId" placeholder="User ID"/></div>
-                        <div className="inp"><input name="pin" placeholder="PIN"/></div>
+                        <div className="inp"><input required name="userId" placeholder="User ID"/></div>
+                        <div className="inp"><input required name="pin" placeholder="PIN"/></div>
                     </div>
                     <div className="cta">
                         <Btn text={"Register"} color={"white"} bgColor={"#0169D9"} />
-                        <Btn text={"Reset"} color={"white"} bgColor={"#727B84"} />
+                        <div onClick={resetForm}>
+                            <Btn text={"Reset"} color={"white"} bgColor={"#727B84"} />
+                        </div>
                         <NavLink to="/signin">
                             <Btn text={"Cancel"} color={"white"} bgColor={"#C82332"} />
                         </NavLink>
