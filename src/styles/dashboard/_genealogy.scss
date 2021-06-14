@@ -1,0 +1,91 @@
+.genealogy {
+
+    &  .search {
+        background-color: white;
+        padding: 2rem ;
+        margin: 1rem;
+        border-radius: .5rem;
+
+        &  h3 {
+            border-bottom: 1px solid rgb(236, 236, 236);
+            padding: .5rem 0;
+            position: relative;
+            font-size: .8rem;
+
+            &::after {
+                content: "";
+                width: 8%;
+                height: .2rem;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                background-color: purple;
+            }
+        }
+
+        &  .form {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+
+            &  input {
+                padding: .7rem;
+                border-radius: .3rem;
+                border: 1px solid rgb(221, 221, 221);
+                width: 15%;
+            }
+
+        }
+    }
+
+    &  .downlines {
+        background-color: white;
+        padding: 2rem ;
+        margin: 1rem;
+        border-radius: .5rem;
+
+        &  h3 {
+            border-bottom: 1px solid rgb(236, 236, 236);
+            padding: .5rem 0;
+            position: relative;
+            font-size: .8rem;
+
+            &::after {
+                content: "";
+                width: 8%;
+                height: .2rem;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                background-color: purple;
+            }
+        }
+
+        &  .table {
+            margin: 2rem 0;
+    
+            &  table {
+                width: 100%;
+                font-size: .8rem;
+                border-collapse: collapse;
+    
+                &  thead {
+                    
+                }
+    
+                &  tr {
+                    width: max-content;
+                }
+                &  td {
+                    border: 1px solid rgb(223, 223, 223);   
+                    padding: .7rem;  
+                    width: max-content;  
+                }
+    
+                &  tbody {
+                    font-weight: 100;
+                }
+            }
+        }
+    }
+}

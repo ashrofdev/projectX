@@ -48,9 +48,7 @@ const Sidebar = () => {
                     <NavLink to="/genealogy">
                         <li>Genealogy</li>
                     </NavLink>
-                    <NavLink to="/">
-                        <li>Transactions</li>
-                    </NavLink>
+                 
                     <NavLink to="/encashments">
                         <li>Encashment</li>
                     </NavLink>
