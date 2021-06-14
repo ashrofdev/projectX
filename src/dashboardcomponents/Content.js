@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import AddAccount from './AddAccount';
 import ChangePassword from './ChangePassword';
+import Encashment from './Encashment';
 import Home from './Home';
 import Profile from './Profile';
 
@@ -16,6 +17,7 @@ const Content = () => {
                 <Route path="/changepassword" component={ChangePassword} />
                 <Route path="/profile" component={Profile} />
                 <Route path="/addaccount" component={AddAccount} />
+                <Route path="/encashments" component={Encashment} />
                 <Route path="/" component={Home} />
 
             </Switch>
