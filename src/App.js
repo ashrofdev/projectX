@@ -22,6 +22,8 @@ function App() {
     const a = ['w','w','e']
     a[100] ='a'
     console.log(typeof(42))
+
+   
   },[])
 
   return (
