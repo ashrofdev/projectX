@@ -51,8 +51,8 @@ const Signup = () => {
                             <option value="left">Left</option>
                             <option value="right">Right</option>
                         </select>
-                        <div className="inp"><input required name="password" placeholder="Password"/></div>
-                        <div className="inp"><input required name="cpassword" placeholder="Confirm Password"/></div>
+                        <div className="inp"><input type="password" required name="password" placeholder="Password"/></div>
+                        <div className="inp"><input type="password" required name="cpassword" placeholder="Confirm Password"/></div>
                         <h3>Activation Info</h3>
                         <div className="inp"><input required name="userId" placeholder="User ID"/></div>
                         <div className="inp"><input required name="pin" placeholder="PIN"/></div>
