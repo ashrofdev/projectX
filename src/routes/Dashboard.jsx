@@ -4,30 +4,33 @@ import Content from '../dashboardcomponents/Content';
 import Header from '../dashboardcomponents/Header';
 import Idpopup from '../dashboardcomponents/Idpopup';
 import Sidebar from '../dashboardcomponents/Sidebar';
-import Fade from 'react-reveal/Bounce'
+import Fade from 'react-reveal/Bounce';
+import { UserContext } from '../Components';
 
-const Dashboard = () => {
+const Dashboard = ({authUser}) => {
 
     const [openAccounts, setOpenAccounts] = useState(false)
 
     return (
-        <div className="dashboard">
-            <BrowserRouter>
-                <Sidebar/>
-                <div>
-                    <Header toggleAccounts={setOpenAccounts} />
-                    <Content/>
-                </div>
-            </BrowserRouter>
-            <div>
-                <Fade collapse top when={openAccounts} >
+        <UserContext.Provider value={authUser}>
+            <div className="dashboard">
+                <BrowserRouter>
+                    <Sidebar/>
                     <div>
-                        <Idpopup toggleAccounts={setOpenAccounts} />
+                        <Header toggleAccounts={setOpenAccounts} />
+                        <Content/>
                     </div>
-                </Fade>
+                </BrowserRouter>
+                <div>
+                    <Fade collapse top when={openAccounts} >
+                        <div>
+                            <Idpopup toggleAccounts={setOpenAccounts} />
+                        </div>
+                    </Fade>
+                </div>
+                
             </div>
-            
-        </div>
+        </UserContext.Provider>
     );
 };
 

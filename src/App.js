@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.scss';
 import { firestore } from './firebase';
@@ -11,6 +11,7 @@ import Signup from './routes/Signup';
 
 
 function App() {
+  const [authUser, setAuthUser] = useState({})
 
  
 
@@ -26,15 +27,19 @@ function App() {
    
   },[])
 
+  const setUser = (user) => {
+    setAuthUser(user)
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route path="/signin" component={Signin} />
+          <Route path="/signin" render={()=> <Signin setUser={setUser} /> } />
           <Route path="/signup" component={Signup} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard" render={()=> <Dashboard authUser={authUser} />} />
           {/* <Route path="/*" component={NotFound} /> */}
-          <Route path="/" component={Signin} />
+          <Route path="/" render={()=> <Signin setUser={setUser} /> } />
         </Switch>
       </BrowserRouter>
     </div>

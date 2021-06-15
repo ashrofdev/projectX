@@ -4,7 +4,8 @@ import Slide from 'react-reveal/Slide';
 import { NavLink, useHistory } from 'react-router-dom';
 import { firestore } from "../firebase"
 
-const Signin = () => {
+
+const Signin = ({setUser}) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const history = useHistory()
@@ -33,6 +34,9 @@ const Signin = () => {
         if(user){
             
             if(user.password===password){
+                
+                setUser(user)
+                
                 history.push("/dashboard")
             }else {
                 alert("Auth failed")

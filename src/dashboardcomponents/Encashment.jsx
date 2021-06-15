@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import {Btn} from '../Components';
+import {Btn, UserContext} from '../Components';
 import Fade from 'react-reveal/Fade';
+import userEvent from '@testing-library/user-event';
 
 const Encashment = () => {
     const [openCta, setOpenCta] = useState(false)
+    const user = React.useContext(UserContext)
     return (
         <div className="encashment">
             <div className="container">
@@ -16,7 +18,7 @@ const Encashment = () => {
                         </div>
                         <div className="text">
                             <h4>Available Balance</h4>
-                            <p>0.00</p>
+                            <p>{user.balance}.00</p>
                         </div>
                     </div>
                     <div>

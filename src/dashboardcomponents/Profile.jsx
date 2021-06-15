@@ -1,6 +1,10 @@
 import React from 'react';
+import { UserContext } from '../Components';
 
 const Profile = () => {
+
+    const user = React.useContext(UserContext)
+
     return (
         <div className="profile">
             <div className="text">Profile Settings</div>
@@ -13,15 +17,15 @@ const Profile = () => {
                     <form>
                         <div className="inputcont">
                             <label >First Name</label>
-                            <input id="ss" type="text" />
+                            <input disabled value={user.firstname} id="ss" type="text" />
                         </div>
                         <div className="inputcont">
                             <label >Last Name</label>
-                            <input id="ss" type="text" />
+                            <input disabled value={user.lastname} id="ss" type="text" />
                         </div>
                         <div className="inputcont">
                             <label >Middle Name</label>
-                            <input id="ss" type="text" />
+                            <input disabled value={user.middlename} id="ss" type="text" />
                         </div>
                         
                         <div className="inputcont">
