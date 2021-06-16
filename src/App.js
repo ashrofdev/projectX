@@ -13,7 +13,7 @@ import Signup from './routes/Signup';
 function App() {
   const [authUser, setAuthUser] = useState({})
 
- 
+  
 
   useEffect(()=> {
     firestore.collection('users').doc('NG783735').get().then(snap=> {
@@ -22,7 +22,6 @@ function App() {
     
     const a = ['w','w','e']
     a[100] ='a'
-    console.log(typeof(42))
 
    
   },[])
