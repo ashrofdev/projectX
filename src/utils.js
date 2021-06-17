@@ -110,19 +110,19 @@ const placeReg = (data, upline) => {
     creditLoop(upline, data.leg)
 }
 
-export const signUp = async (data) => {
+export const signUp = async (data, toggleNotification) => {
     let uplinePromise = getUser(data.uplineId)
     uplinePromise.then(e=> {
         console.log(e)
         if(e===undefined){
-
+            toggleNotification('error', 'Invalid upline ID')
         }else {
             const newUpline = checkAvailableUpline(e, data.leg)
             newUpline.then(e=> {
                 if(e===data.upline){
                     placeReg(data, e)
                 }else {
-                    /// downline change process
+                    /// downline change permissions
                 }
             })
 

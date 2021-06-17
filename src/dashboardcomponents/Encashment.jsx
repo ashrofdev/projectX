@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {Btn, UserContext} from '../Components';
 import Fade from 'react-reveal/Fade';
-import userEvent from '@testing-library/user-event';
 
 const Encashment = () => {
     const [openCta, setOpenCta] = useState(false)

@@ -4,7 +4,7 @@ import Slide from 'react-reveal/Slide';
 import { NavLink } from 'react-router-dom';
 import { signUp } from '../utils';
 
-const Signup = () => {
+const Signup = ({toggleNotification}) => {
 
     const signup = (e) => {
         e.preventDefault()
@@ -25,7 +25,7 @@ const Signup = () => {
                 right: ''
             }
         }
-        signUp(data)
+        signUp(data, toggleNotification)
     }
 
     const resetForm = () => {

@@ -5,7 +5,7 @@ const Genealogy = () => {
     return (
         <div className="genealogy">
             <div style={{height: '20rem'}} className="tree">
-            // tree 
+            {/* // tree  */}
             </div>
 
             <div className="search">
