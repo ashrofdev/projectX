@@ -1,4 +1,9 @@
-import { firestore } from "./firebase"
+import { firestore } from "./firebase";
+
+const activationInfo = {
+    userId: 'NG647385',
+    pin: 'DJRNANFX'
+}
 
 const getUser = async (userId) => {
     // firebase function to return result
@@ -110,24 +115,39 @@ const placeReg = (data, upline) => {
     creditLoop(upline, data.leg)
 }
 
-export const signUp = async (data, toggleNotification) => {
-    let uplinePromise = getUser(data.uplineId)
-    uplinePromise.then(e=> {
-        console.log(e)
-        if(e===undefined){
-            toggleNotification('error', 'Invalid upline ID')
-        }else {
-            const newUpline = checkAvailableUpline(e, data.leg)
-            newUpline.then(e=> {
-                if(e===data.upline){
-                    placeReg(data, e)
-                }else {
-                    /// downline change permissions
-                }
-            })
+export const signUp = async (data, toggleNotification, requestPermission, setUpline) => {
 
-        }
-    })
+    const activationData = {
+        userId: data.userId,
+        pin: data.pin
+    }
+
+    if(activationData.userId===activationInfo.userId && activationData.pin===activationInfo.pin){
+        let uplinePromise = getUser(data.uplineId)
+        uplinePromise.then(e=> { 
+            console.log(e)
+            if(e===undefined){
+                toggleNotification('error', 'Invalid upline ID')
+            }else {
+                const newUpline = checkAvailableUpline(e, data.leg)
+                newUpline.then(e=> {
+                    if(e===data.upline){
+                        placeReg(data, e)
+                    }else {
+                        /// downline change permissions
+                        requestPermission()
+
+                    }
+                })
+
+            }
+        })
+    }else {
+
+        toggleNotification('error', 'Invalid Activation code')
+    }
+
+    
   
     // 
 

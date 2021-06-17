@@ -23,7 +23,7 @@ export const Notification = ({type, message}) => {
                 <p>{message}</p>
             </div>
         )
-    }else {
+    }else if(type==='success') {
         return (
             <div className="notification success">
                 {/* component features */}
@@ -31,6 +31,8 @@ export const Notification = ({type, message}) => {
                 <p>{message}</p>
             </div>
         )
+    }else {
+        return null
     }
     
 }
