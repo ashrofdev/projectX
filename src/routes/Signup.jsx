@@ -1,16 +1,38 @@
 import React, { useState } from 'react';
 import {Btn} from '../Components';
 import Slide from 'react-reveal/Slide';
+import Fade from 'react-reveal/Fade';
 import { NavLink } from 'react-router-dom';
-import { signUp } from '../utils';
+import { signUp, getUser, placeReg } from '../utils';
+import { useHistory } from "react-router-dom";
 
 const Signup = ({toggleNotification}) => {
+    const history = useHistory()
+
     const [permission, setPermission] = useState(false)
+    const [upline, setNewUpline] = useState("")
+    const [uplineDetails, setUplineDetails] = useState({})
+    const [data, setData] = useState({})
 
     const requestPermission = () => {
         setPermission(!permission)
     }
+
+    const proceed = () => {
+
+        placeReg(data, upline)
+        setTimeout(() => {
+            history.push('/signin')
+        }, 2000);
+    }
     
+    const setUpline = (userId) => {
+        const user = getUser(userId)
+        user.then(e=> {
+            setNewUpline(userId)
+            setUplineDetails(e)
+        })
+    }
 
     const signup = (e) => {
         e.preventDefault()
@@ -29,9 +51,13 @@ const Signup = ({toggleNotification}) => {
             downlines: {
                 left: '',
                 right: ''
-            }
+            },
+            leftPoints: 0,
+            rightPoints: 0,
+            balance: 0
         }
-        signUp(data, toggleNotification, requestPermission)
+        setData(data)
+        signUp(data, toggleNotification, requestPermission, setUpline)
     }
 
     const resetForm = () => {
@@ -41,7 +67,7 @@ const Signup = ({toggleNotification}) => {
         <div className="signup">
             <Slide right>
                 <form className="form" onSubmit={(e) => signup(e)}>
-                    <Slide collapse when={!permission}>
+                    <Slide duration={300} collapse when={!permission}>
                         <header>
                             <h2>Registration Form</h2>
                         </header>
@@ -75,9 +101,20 @@ const Signup = ({toggleNotification}) => {
                         </div>
                     </Slide>
 
-                    <Slide collapse right when={permission}>
-                            <p>The provied upline ID is not available you will now be placed under userID</p>
-                    </Slide>
+                    <Fade duration={500} delay={700} right when={permission} collapse>
+                        <div className="permissioninfo">
+                            <p>The provied upline ID is not available you will now be placed under <span>({upline}) {uplineDetails.firstname} {uplineDetails.lastname} </span> </p>
+                            <div className="cta">
+                                <div onClick={proceed} >
+                                    <Btn text={"Proceed"} color={"white"} bgColor={"#0169D9"} />
+                                </div>
+                                
+                                <div onClick={()=> requestPermission()}>
+                                    <Btn type="button" text={"Cancel"} color={"white"} bgColor={"#C82332"} />
+                                </div>
+                            </div>
+                        </div>
+                    </Fade>
                 </form>
             </Slide>
         </div>

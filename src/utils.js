@@ -1,11 +1,12 @@
 import { firestore } from "./firebase";
 
+
 const activationInfo = {
-    userId: 'NG647385',
-    pin: 'DJRNANFX'
+    userId: 'AA111',
+    pin: 'XXX'
 }
 
-const getUser = async (userId) => {
+export const getUser = async (userId) => {
     // firebase function to return result
     let userData
     await firestore.collection('users').doc(userId).get().then(user => {
@@ -93,7 +94,8 @@ const creditLoop = async (id, leg) => {
 
 }
 
-const placeReg = (data, upline) => {
+export const placeReg = (data, upline) => {
+
     data.uplineId = upline
     console.log(data,"*")
 
@@ -111,6 +113,7 @@ const placeReg = (data, upline) => {
         }
         
         console.log(e)
+
     })
     creditLoop(upline, data.leg)
 }
@@ -135,6 +138,7 @@ export const signUp = async (data, toggleNotification, requestPermission, setUpl
                         placeReg(data, e)
                     }else {
                         /// downline change permissions
+                        setUpline(e)
                         requestPermission()
 
                     }

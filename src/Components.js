@@ -3,7 +3,7 @@ import React from "react"
 // creating react context
 export const UserContext = React.createContext()
 
-export const Btn = ({text, bgColor, color }) => <button className="btn" style={{color, backgroundColor:bgColor}} >{text}</button>
+export const Btn = ({text, bgColor, color, type }) => <button className="btn" type={type} style={{color, backgroundColor:bgColor}} >{text}</button>
 
 export const Notification = ({type, message}) => {
 

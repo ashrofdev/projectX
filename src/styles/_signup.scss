@@ -108,5 +108,13 @@
             margin: auto;
             justify-content: center;
         }
+
+        &  .permissioninfo {
+            font-size: .8rem;
+
+            &  span {
+                font-weight: 600;
+            }
+        }
     }
 }
