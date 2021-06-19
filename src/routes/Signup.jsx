@@ -3,7 +3,7 @@ import {Btn} from '../Components';
 import Slide from 'react-reveal/Slide';
 import Fade from 'react-reveal/Fade';
 import { NavLink } from 'react-router-dom';
-import { signUp, getUser, placeReg } from '../utils';
+import { signUp, getUser, placeReg, creditSponsor } from '../utils';
 import { useHistory } from "react-router-dom";
 
 const Signup = ({toggleNotification}) => {
@@ -21,6 +21,7 @@ const Signup = ({toggleNotification}) => {
     const proceed = () => {
 
         placeReg(data, upline)
+        creditSponsor(data.sponsorId, 4500)
         setTimeout(() => {
             history.push('/signin')
         }, 2000);
@@ -36,7 +37,7 @@ const Signup = ({toggleNotification}) => {
 
     const signup = (e) => {
         e.preventDefault()
-        const data = {
+        const dataa = {
             lastname: e.target.lastname.value,
             firstname: e.target.firstname.value,
             middlename: e.target.middlename.value,
@@ -56,8 +57,8 @@ const Signup = ({toggleNotification}) => {
             rightPoints: 0,
             balance: 0
         }
-        setData(data)
-        signUp(data, toggleNotification, requestPermission, setUpline)
+        setData(dataa)
+        signUp(dataa, toggleNotification, requestPermission, setUpline)
     }
 
     const resetForm = () => {

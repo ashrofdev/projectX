@@ -1,10 +1,28 @@
 import { firestore } from "./firebase";
 
 
-const activationInfo = {
-    userId: 'AA111',
-    pin: 'XXX'
-}
+const activationInfo = [
+    {
+        userId: 'NG105032',
+        pin: 'XDSEWT'
+    },
+    {
+        userId: 'NG178031',
+        pin: 'ADEFYW'
+    },
+    {
+        userId: 'NG574289',
+        pin: 'HWKRUS'
+    },
+    {
+        userId: 'NG575325',
+        pin: 'JDHRND'
+    },
+    {
+        userId: 'NG987539',
+        pin: 'JSHURA'
+    }
+]
 
 export const getUser = async (userId) => {
     // firebase function to return result
@@ -118,6 +136,10 @@ export const placeReg = (data, upline) => {
     creditLoop(upline, data.leg)
 }
 
+export const creditSponsor = (sponsor) => {
+    increaseBalance(sponsor, 4500)
+}
+
 export const signUp = async (data, toggleNotification, requestPermission, setUpline) => {
 
     const activationData = {
@@ -125,34 +147,41 @@ export const signUp = async (data, toggleNotification, requestPermission, setUpl
         pin: data.pin
     }
 
-    if(activationData.userId===activationInfo.userId && activationData.pin===activationInfo.pin){
-        let uplinePromise = getUser(data.uplineId)
-        uplinePromise.then(e=> { 
-            console.log(e)
-            if(e===undefined){
-                toggleNotification('error', 'Invalid upline ID')
-            }else {
-                const newUpline = checkAvailableUpline(e, data.leg)
-                newUpline.then(e=> {
-                    if(e===data.upline){
-                        placeReg(data, e)
-                    }else {
-                        /// downline change permissions
-                        setUpline(e)
-                        requestPermission()
+    let activated
+    activationInfo.forEach(info => {
+        if(activationData.userId===info.userId && activationData.pin===info.pin){
+            activated = 'found'
+            let uplinePromise = getUser(data.uplineId)
+            uplinePromise.then(e=> { 
+                console.log(e)
+                if(e===undefined){
+                    toggleNotification('error', 'Invalid upline ID')
+                }else {
+                    const newUpline = checkAvailableUpline(e, data.leg)
+                    newUpline.then(e=> {
 
-                    }
-                })
-
-            }
-        })
-    }else {
-
+                        if(e===data.uplineId){
+                            placeReg(data, e)
+                            creditSponsor(data.sponsorId)
+                        }else {
+                            /// downline change permissions
+                            setUpline(e)
+                            requestPermission()
+    
+                        }
+                    })
+    
+                }
+            })
+        }else {
+    
+            
+        }
+    })
+    if(activated !== 'found') {
         toggleNotification('error', 'Invalid Activation code')
     }
 
-    
-  
     // 
 
 
