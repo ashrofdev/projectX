@@ -48,9 +48,20 @@ export const addPoints = (id, leg, points) => {
 }
 
 export const increaseBalance = (id, amount) => {
-    firestore.collection('users').doc(id).update({
-        balance: amount
+    const doc = firestore.collection('users').doc(id)
+
+    return firestore.runTransaction(transaction => {
+        return transaction.get(doc).then(user=> {
+            const newBalance = user.data().balance+amount
+            transaction.update(doc, { balance: newBalance });
+        })
+
+    }).then(()=>{
+
+    }).catch((error)=>{
+        alert(error)
     })
+   
 }
 
 export const checkAvailableUpline = async (upline, leg) => {
@@ -88,7 +99,7 @@ const creditLoop = async (id, leg) => {
         if(leg==='left'){
             /// check for point on right
             if(user.rightPoints>=700){
-                increaseBalance(user.userId, user.balance+7000)
+                increaseBalance(user.userId, 7000)
                 addPoints(user.userId, 'right', user.rightPoints-700)
             }else{
                 addPoints(user.userId, leg, user.leftPoints+700)
@@ -97,7 +108,7 @@ const creditLoop = async (id, leg) => {
         }else{
             /// check for point on right
             if(user.leftPoints>=700){
-                increaseBalance(user.userId, user.balance+7000)
+                increaseBalance(user.userId, 7000)
                 addPoints(user.userId, 'left', user.leftPoints-700)
             }else{
                 addPoints(user.userId, leg, user.rightPoints+700)
@@ -190,7 +201,7 @@ export const signUp = async (data, toggleNotification, requestPermission, setUpl
 
 
 /// when you register
-// 1 check if the upline provided has an empty leg
+// 1. check if the upline provided has an empty leg
 // ---- if(empty)=>proceed to crediting
 // ----- else=> proceed to downline search
 
@@ -210,3 +221,4 @@ export const signUp = async (data, toggleNotification, requestPermission, setUpl
 // 3 call creditAccoint() to credit the provided upline
 // 4 check if the upline has an upline
 // run code (1)
+

@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { UserContext } from '../Components';
+
+
 
 const AddAccount = () => {
+    const user = React.useContext(UserContext)
+
+    const [sponsorId, setSponsorId] = useState('')
+    const [uplineId, setUplineId] = useState('')
+    const [position, setPosition] = useState('')
+    const [userId, setUserId] = useState('')
+    const [pin, setPin] = useState('')
+
+    const addAccount = () => {
+        user.sponsorId=sponsorId
+        user.uplineId=uplineId
+        user.leg=position
+        user.userId=userId
+        user.pin=pin
+        console.log({sponsorId,uplineId,position,userId,pin})
+    }
+
     return (
         <div>
             <div className="cont">
@@ -10,14 +30,14 @@ const AddAccount = () => {
 
                     <form>
                         <label >Sponsor ID</label>
-                        <input type="text" placeholder="Sponsor ID"/>
+                        <input onChange={(e)=> setSponsorId(e.target.value)} type="text" placeholder="Sponsor ID"/>
                         <label >Upline ID</label>
-                        <input type="text" placeholder="Upline ID"/>
+                        <input onChange={(e)=> setUplineId(e.target.value)} type="text" placeholder="Upline ID"/>
                         
-                        <select>
+                        <select required onChange={(e)=> setPosition(e.target.value)}>
                             <option value="">Select Position</option>
-                            <option value="Option 1">Option 1</option>
-                            <option value="Option 2">Option 2</option>
+                            <option value="left">Left</option>
+                            <option value="right">Right</option>
                         </select>
                     </form>
 
@@ -29,14 +49,14 @@ const AddAccount = () => {
 
                     <form>
                         <label >User ID</label>
-                        <input type="text" placeholder="User ID"/>
+                        <input onChange={(e)=> setUserId(e.target.value)} type="text" placeholder="User ID"/>
                         <label >Security Pin</label>
-                        <input type="text" placeholder="Security Pin"/>
+                        <input onChange={(e)=> setPin(e.target.value)} type="text" placeholder="Security Pin"/>
                     </form>
                     
                 </div>
                 <div id="clearf"></div>
-                <input type="submit" value="Register" className="btn"/>
+                <input onClick={addAccount} type="submit" value="Register" className="btn"/>
                 
             </div>
         </div>
