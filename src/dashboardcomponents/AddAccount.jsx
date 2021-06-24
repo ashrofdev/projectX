@@ -34,7 +34,11 @@ const AddAccount = ({toggleNotification}) => {
             },
             leftPoints: 0,
             rightPoints: 0,
-            balance: 0
+            balance: 0,
+            leftCount: 0,
+            rightCount: 0,
+            totalEarning: 0,
+            parentAccount: user.userId
         }
 
         console.log({sponsorId,uplineId,position,userId,pin})

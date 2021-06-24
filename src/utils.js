@@ -227,6 +227,9 @@ export const addNewAccount = async (data, toggleNotification) => {
 
                         placeReg(data, e)
                         creditSponsor(data.sponsorId)
+
+                        //adding account to parent account
+                        firestore.collection('users').doc(data.parentAccount).collection('accounts').doc(data.userId).set({...data})
                         
                     })
     
