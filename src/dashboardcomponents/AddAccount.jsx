@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { UserContext } from '../Components';
+import { addNewAccount } from '../utils';
 
 
 
-const AddAccount = () => {
+const AddAccount = ({toggleNotification}) => {
     const user = React.useContext(UserContext)
 
     const [sponsorId, setSponsorId] = useState('')
@@ -18,7 +19,26 @@ const AddAccount = () => {
         user.leg=position
         user.userId=userId
         user.pin=pin
+        const accountData = {
+            lastname: user.lastname,
+            firstname: user.firstname,
+            middlename: user.middlename,
+            sponsorId,
+            uplineId,
+            leg: position,
+            userId,
+            pin,
+            downlines: {
+                left: '',
+                right: ''
+            },
+            leftPoints: 0,
+            rightPoints: 0,
+            balance: 0
+        }
+
         console.log({sponsorId,uplineId,position,userId,pin})
+        addNewAccount(accountData, toggleNotification)
     }
 
     return (

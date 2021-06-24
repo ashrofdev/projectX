@@ -199,6 +199,49 @@ export const signUp = async (data, toggleNotification, requestPermission, setUpl
     
 }
 
+export const addNewAccount = async (data, toggleNotification) => {
+
+    const activationData = {
+        userId: data.userId,
+        pin: data.pin
+    }
+
+    let activated
+    activationInfo.forEach(info => {
+        if(activationData.userId===info.userId && activationData.pin===info.pin){
+            activated = 'found'
+            let uplinePromise = getUser(data.uplineId)
+            uplinePromise.then(e=> { 
+                console.log(e)
+                if(e===undefined){
+                    toggleNotification('error', 'Invalid upline ID')
+                }else {
+                    const newUpline = checkAvailableUpline(e, data.leg)
+                    newUpline.then(e=> {
+
+                        placeReg(data, e)
+                        creditSponsor(data.sponsorId)
+                        
+                    })
+    
+                }
+            })
+        }else {
+    
+            
+        }
+    })
+    if(activated !== 'found') {
+        toggleNotification('error', 'Invalid Activation code')
+    }
+
+    // 
+
+
+    
+}
+
+
 
 /// when you register
 // 1. check if the upline provided has an empty leg

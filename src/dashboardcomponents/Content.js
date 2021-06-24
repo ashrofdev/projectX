@@ -8,7 +8,7 @@ import Home from './Home';
 import Profile from './Profile';
 
 
-const Content = () => {
+const Content = ({toggleNotification}) => {
     return (
         <div className="dashcontent">
             {/* <Home/> */}
@@ -17,7 +17,7 @@ const Content = () => {
 
                 <Route path="/changepassword" component={ChangePassword} />
                 <Route path="/profile" component={Profile} />
-                <Route path="/addaccount" component={AddAccount} />
+                <Route path="/addaccount" render={()=> <AddAccount toggleNotification={toggleNotification} /> }  />
                 <Route path="/encashments" component={Encashment} />
                 <Route path="/genealogy" component={Genealogy} />
                 <Route path="/" component={Home} />

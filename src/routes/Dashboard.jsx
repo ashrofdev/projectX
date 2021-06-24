@@ -7,7 +7,7 @@ import Sidebar from '../dashboardcomponents/Sidebar';
 import Fade from 'react-reveal/Bounce';
 import { UserContext } from '../Components';
 
-const Dashboard = ({authUser}) => {
+const Dashboard = ({authUser, toggleNotification}) => {
 
     const [openAccounts, setOpenAccounts] = useState(false)
 
@@ -18,7 +18,7 @@ const Dashboard = ({authUser}) => {
                     <Sidebar/>
                     <div>
                         <Header toggleAccounts={setOpenAccounts} />
-                        <Content/>
+                        <Content toggleNotification={toggleNotification} />
                     </div>
                 </BrowserRouter>
                 <div>
