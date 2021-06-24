@@ -55,7 +55,10 @@ const Signup = ({toggleNotification}) => {
             },
             leftPoints: 0,
             rightPoints: 0,
-            balance: 0
+            balance: 0,
+            totalEarning: 0,
+            leftCount: 0,
+            rightCount: 0
         }
         setData(dataa)
         signUp(dataa, toggleNotification, requestPermission, setUpline)

@@ -34,15 +34,17 @@ export const getUser = async (userId) => {
     return userData.data()
 }
 
-export const addPoints = (id, leg, points) => {
+export const addPoints = (id, leg, points, legCount) => {
 
     if(leg==='left'){
         firestore.collection('users').doc(id).update({
-            leftPoints: points
+            leftPoints: points,
+            legCount
         })
     }else {
         firestore.collection('users').doc(id).update({
-            rightPoints: points
+            rightPoints: points,
+            legCount
         })
     }
 }
@@ -53,7 +55,11 @@ export const increaseBalance = (id, amount) => {
     return firestore.runTransaction(transaction => {
         return transaction.get(doc).then(user=> {
             const newBalance = user.data().balance+amount
-            transaction.update(doc, { balance: newBalance });
+            const newTotalEarning = user.data().totalEarning+amount
+            transaction.update(doc, { 
+                balance: newBalance,
+                totalEarning: newTotalEarning
+            });
         })
 
     }).then(()=>{
@@ -100,18 +106,18 @@ const creditLoop = async (id, leg) => {
             /// check for point on right
             if(user.rightPoints>=700){
                 increaseBalance(user.userId, 7000)
-                addPoints(user.userId, 'right', user.rightPoints-700)
+                addPoints(user.userId, 'right', user.rightPoints-700, user.rightLegCount+1)
             }else{
-                addPoints(user.userId, leg, user.leftPoints+700)
+                addPoints(user.userId, leg, user.leftPoints+700, user.leftLegCount+1)
             }
             
         }else{
             /// check for point on right
             if(user.leftPoints>=700){
                 increaseBalance(user.userId, 7000)
-                addPoints(user.userId, 'left', user.leftPoints-700)
+                addPoints(user.userId, 'left', user.leftPoints-700, user.leftLegCount+1)
             }else{
-                addPoints(user.userId, leg, user.rightPoints+700)
+                addPoints(user.userId, leg, user.rightPoints+700, user.rightLegCount+1)
             }
             
         }
