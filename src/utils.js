@@ -252,19 +252,19 @@ export const addNewAccount = async (data, toggleNotification) => {
     
 }
 
-export const getDownlines = (userId) => {
+// export const getDownlines = (userId) => {
 
-    const lv2 = []
-    const lv3 = []
-    const lv4 = []
-    const lv5 = []
+//     const lv2 = []
+//     const lv3 = []
+//     const lv4 = []
+//     const lv5 = []
 
-    getUser(userId).then(user=> {
-        let downlines = user.downlines
+//     getUser(userId).then(user=> {
+//         let downlines = user.downlines
         
 
-    })
-}
+//     })
+// }
 
 /// when you register
 // 1. check if the upline provided has an empty leg
