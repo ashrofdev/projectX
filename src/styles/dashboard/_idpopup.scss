@@ -42,18 +42,22 @@
 
             &  .accounts {
                 width: 90%;
-                margin: auto;
+                margin: 2rem auto;
+                border-collapse: collapse;
 
                 &  .account {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     padding: 1rem;
-                    background-color: #8AC297;
-                    margin: 1rem 0;
                     border: 1px solid rgb(223, 223, 223);
                     border-left: none;
                     border-right: none;
+                    cursor: pointer;
+
+                    &:hover{
+                        background-color: #8AC297;
+                    }
                 }
             }
         }
