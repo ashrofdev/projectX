@@ -56,7 +56,7 @@ function App() {
         <Switch>
           <Route path="/signin" render={()=> <Signin toggleNotification={toggleNotification} setUser={setUser} /> } />
           <Route path="/signup" render={()=> <Signup toggleNotification={toggleNotification} /> } />
-          <Route path="/dashboard" render={()=> <Dashboard toggleNotification={toggleNotification} authUser={authUser} />} />
+          <Route path="/dashboard" render={()=> <Dashboard toggleNotification={toggleNotification} setUser={setUser} authUser={authUser} />} />
           {/* <Route path="/*" component={NotFound} /> */}
           <Route path="/" render={()=> <Signin toggleNotification={toggleNotification} setUser={setUser} /> } />
         </Switch>

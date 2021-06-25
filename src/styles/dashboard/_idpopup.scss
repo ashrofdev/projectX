@@ -39,6 +39,23 @@
             &  .close {
                 cursor: pointer;
             }
+
+            &  .accounts {
+                width: 90%;
+                margin: auto;
+
+                &  .account {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 1rem;
+                    background-color: #8AC297;
+                    margin: 1rem 0;
+                    border: 1px solid rgb(223, 223, 223);
+                    border-left: none;
+                    border-right: none;
+                }
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ import Sidebar from '../dashboardcomponents/Sidebar';
 import Fade from 'react-reveal/Bounce';
 import { UserContext } from '../Components';
 
-const Dashboard = ({authUser, toggleNotification}) => {
+const Dashboard = ({authUser, toggleNotification, setUser}) => {
 
     const [openAccounts, setOpenAccounts] = useState(false)
 
@@ -24,7 +24,7 @@ const Dashboard = ({authUser, toggleNotification}) => {
                 <div>
                     <Fade collapse top when={openAccounts} >
                         <div>
-                            <Idpopup toggleAccounts={setOpenAccounts} />
+                            <Idpopup setUser={setUser} toggleAccounts={setOpenAccounts} />
                         </div>
                     </Fade>
                 </div>

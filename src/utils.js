@@ -229,7 +229,9 @@ export const addNewAccount = async (data, toggleNotification) => {
                         creditSponsor(data.sponsorId)
 
                         //adding account to parent account
-                        firestore.collection('users').doc(data.parentAccount).collection('accounts').doc(data.userId).set({...data})
+                        firestore.collection('users').doc(data.parentAccount).collection('accounts').doc(data.userId).set({...data}).then(()=>{
+                            toggleNotification('success', 'User registered successfully')
+                        })
                         
                     })
     

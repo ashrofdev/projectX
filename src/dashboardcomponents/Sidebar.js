@@ -36,7 +36,7 @@ const Sidebar = () => {
                                 <NavLink to="/addaccount">
                                     <li>Add Account</li>
                                 </NavLink>
-                                <li>Logout</li>
+                                <NavLink to="/"><li>Logout</li></NavLink>
                             </ul>
                         </Fade>
                     </div>
