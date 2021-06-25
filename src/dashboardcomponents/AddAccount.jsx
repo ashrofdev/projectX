@@ -14,11 +14,7 @@ const AddAccount = ({toggleNotification}) => {
     const [pin, setPin] = useState('')
 
     const addAccount = () => {
-        user.sponsorId=sponsorId
-        user.uplineId=uplineId
-        user.leg=position
-        user.userId=userId
-        user.pin=pin
+       
         const accountData = {
             lastname: user.lastname,
             firstname: user.firstname,
