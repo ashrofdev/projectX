@@ -1,5 +1,33 @@
 .genealogy {
 
+    &  .treecontainer {
+        padding: .5rem 0;
+
+        &  .tree {
+            width: 100%;
+            margin: auto;
+
+            &  .branchlane {
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                margin: auto;
+                overflow: hidden;
+
+                &  .branch {
+                    background-color: #DEEEF6;
+                    box-shadow: 1px 1px 5px rgb(104, 104, 104);
+                    border-radius: .2rem;
+                    padding: .5rem 1.5rem;
+                    overflow: hidden;
+                    &  p {
+                        font-size: .8rem;
+                    }
+                }
+            }
+        }
+    }
+
     &  .search {
         background-color: white;
         padding: 2rem ;
