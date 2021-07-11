@@ -12,14 +12,16 @@
                 align-items: center;
                 justify-content: space-evenly;
                 margin: auto;
+                padding: .7rem 0;
                 overflow: hidden;
 
                 &  .branch {
                     background-color: #DEEEF6;
-                    box-shadow: 1px 1px 5px rgb(104, 104, 104);
+                    box-shadow: 1px 3px 3px rgb(104, 104, 104);
                     border-radius: .2rem;
-                    padding: .5rem 1.5rem;
+                    padding: .2rem 1.5rem;
                     overflow: hidden;
+                    text-align: center;
                     &  p {
                         font-size: .8rem;
                     }
