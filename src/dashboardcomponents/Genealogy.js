@@ -6,28 +6,39 @@ import nodeL from '../img/nodeL.jpg';
 import { getUser } from '../utils';
 
 const Genealogy = () => {
+    const user = useContext(UserContext)
 
+    const [rootId, setRootId] = useState(user.userId)
     const [branch2, setBranch2] = useState(['',''])
     const [branch3, setBranch3] = useState(['','','',''])
     const [branch4, setBranch4] = useState(['','','','','','','',''])
     const [branch5, setBranch5] = useState(['','','','','','','','','','','','','','','',''])
     // const [t, setT] = useState([])
 
-    const user = useContext(UserContext)
 
     useEffect(()=>{
         
-        generateData(user.userId)
+        generateData(rootId)
        
         // setT('done')
-    },[user])
+    },[rootId])
 
-    const generateData = async (rootId) => {
+    const regenerate = (topline) => {
+        setBranch2(['',''])
+        setBranch3(['','','',''])
+        setBranch4(['','','','','','','',''])
+        setBranch5(['','','','','','','','','','','','','','','',''])
+        setRootId(topline)
+        generateData(rootId)
+    }
+
+    const generateData = async (id) => {
+        
         const branch2i = []
         const branch3i = []
         const branch4i = []
         const branch5i = []
-        getUser(rootId).then(user=>{
+        getUser(id).then(user=>{
             if(user===undefined){
                 branch2i.push("")
                 branch2i.push("")
@@ -110,7 +121,7 @@ const Genealogy = () => {
 
                 <div className="tree">
                     <div className="branchlane">
-                        <div className="branch">
+                        <div className="branch" title={rootId}>
                             <p className="p"><img src={nodeRoot} alt="node-icon" /></p>    
                             <p>1</p>
                         </div>
@@ -119,7 +130,7 @@ const Genealogy = () => {
                     {/* // branch line 2 */}
                     <div className="branchlane" style={{width: '100%'}}>
                         {branch2.map((branch,i)=>{
-                            return <div className="branch" title={branch} onClick={()=> generateData(branch)}>
+                            return <div className="branch" title={branch} onClick={()=> regenerate(branch)}>
                                 {branch==="" || branch===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }  
                                 <p>{i+2}</p>
                             </div>
@@ -129,7 +140,7 @@ const Genealogy = () => {
                     {/* // branch line 3 */}
                     <div className="branchlane" style={{width: '97%'}}>
                         {branch3.map((branch,i)=>{
-                            return <div className="branch" title={branch} onClick={()=> generateData(branch)}>
+                            return <div className="branch" title={branch} onClick={()=> regenerate(branch)}>
                                 {branch==="" || branch===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }  
                                 <p>{i+4}</p>
                             </div>
@@ -139,7 +150,7 @@ const Genealogy = () => {
                     {/* {// branch line 4} */}
                     <div className="branchlane" style={{width: '88%'}}>
                         {branch4.map((branch, i)=>{
-                            return <div className="branch" title={branch} onClick={()=> generateData(branch)}>
+                            return <div className="branch" title={branch} onClick={()=> regenerate(branch)}>
                                 {branch==="" || branch===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }  
                                 <p>{i+8}</p>
                             </div>
@@ -147,7 +158,7 @@ const Genealogy = () => {
                     </div>
                     <div className="branchlane" style={{width: '85%'}}>
                         {branch5.map((branch, i)=>{
-                            return <div className="branch" title={branch} onClick={()=> generateData(branch)}>
+                            return <div className="branch" title={branch} onClick={()=> regenerate(branch)}>
                                 {branch==="" || branch===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }  
                                 <p>{i+16}</p>
                             </div>
