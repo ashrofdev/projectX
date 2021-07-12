@@ -2,21 +2,24 @@ import React, { useContext, useEffect, useState } from 'react';
 import {Btn, UserContext} from '../Components';
 import nodeRoot from '../img/node_root.jpg';
 import nodeL from '../img/nodeL.jpg';
-import nodeR from '../img/nodeR.jpg';
+// import nodeR from '../img/nodeR.jpg';
 import { getUser } from '../utils';
 
 const Genealogy = () => {
 
-    const [branch2, setBranch2] = useState([])
-    const [branch3, setBranch3] = useState([])
-    const [branch4, setBranch4] = useState([])
-    const [branch5, setBranch5] = useState([])
+    const [branch2, setBranch2] = useState(['',''])
+    const [branch3, setBranch3] = useState(['','','',''])
+    const [branch4, setBranch4] = useState(['','','','','','','',''])
+    const [branch5, setBranch5] = useState(['','','','','','','','','','','','','','','',''])
     // const [t, setT] = useState([])
 
     const user = useContext(UserContext)
 
     useEffect(()=>{
+        
         generateData(user.userId)
+       
+        // setT('done')
     },[user])
 
     const generateData = async (rootId) => {
@@ -24,7 +27,7 @@ const Genealogy = () => {
         const branch3i = []
         const branch4i = []
         const branch5i = []
-        await getUser(rootId).then(user=>{
+        getUser(rootId).then(user=>{
             if(user===undefined){
                 branch2i.push("")
                 branch2i.push("")
@@ -32,10 +35,14 @@ const Genealogy = () => {
                 branch2i.push(user.downlines.left)
                 branch2i.push(user.downlines.right)
             }
+           
+            
+                
+        }).then(()=>{
             setBranch2(branch2i)
-        })
-            branch2i.forEach( async (id)=>{
-                await getUser(id).then(user=>{
+            let count = 0
+            branch2i.forEach((id)=>{
+                getUser(id).then(user=>{
                     if(user===undefined){
                         branch3i.push("")
                         branch3i.push("")
@@ -43,26 +50,43 @@ const Genealogy = () => {
                         branch3i.push(user.downlines.left)
                         branch3i.push(user.downlines.right)
                     }
+                        
+                        console.log(branch3i,'mdmdmdmdmdmdmdmdmdm')
                 }).then(()=>{
-                    setBranch3(branch3i)
+                    if(count>=1){
+                        setBranch3(branch3i)
+                    }
+                    count+=1
+
+                    //solving for 4th branch
+                    branch3i.forEach(id=>{
+
+                        getUser(id).then(user=>{
+                            if(user===undefined){
+                                branch4i.push("")
+                                branch4i.push("")
+                            }else {
+                                branch4i.push(user.downlines.left)
+                                branch4i.push(user.downlines.right)
+                            }
+        
+                            
+                        }).then(()=>{
+                            if(count>=7){
+                                setBranch4(branch4i)
+                            }
+                            count+=2
+                            console.log(branch4i,'iiiiiiiii')
+                        })
+                    })
                 })
                     
                 
             })
+        })
+            
         
-            branch3i.forEach(id=>{
-                getUser(id).then(user=>{
-                    if(user===undefined){
-                        branch4i.push("")
-                        branch4i.push("")
-                    }else {
-                        branch4i.push(user.downlines.left)
-                        branch4i.push(user.downlines.right)
-                    }
-
-                    setBranch4(branch4i)
-                })
-            })
+            
         
             branch4i.forEach(id=>{
                 getUser(id).then(user=>{
@@ -77,9 +101,6 @@ const Genealogy = () => {
                     setBranch5(branch5i)
                 })
             })
-        
-       
-        // setT('done')
     }
 
     return (
@@ -97,136 +118,41 @@ const Genealogy = () => {
 
                     {/* // branch line 2 */}
                     <div className="branchlane" style={{width: '100%'}}>
-                        <div className="branch">
-                            {branch2[0]==="" || branch2[0]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }  
-                            <p>2</p>
-                        </div>
-                        <div className="branch">
-                            {branch2[1]==="" || branch2[1]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }  
-                            <p>3</p>
-                        </div>
+                        {branch2.map((branch,i)=>{
+                            return <div className="branch" title={branch} onClick={()=> generateData(branch)}>
+                                {branch==="" || branch===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }  
+                                <p>{i+2}</p>
+                            </div>
+                        })}
                     </div>
 
                     {/* // branch line 3 */}
                     <div className="branchlane" style={{width: '97%'}}>
-                        <div className="branch">
-                            {branch3[0]==="" || branch3[0]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }  
-                            <p>4</p>
-                        </div>
-                        <div className="branch">
-                            {branch3[1]==="" || branch3[1]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }   
-                            <p>5</p>
-                        </div>
-                        <div className="branch">
-                            {branch3[2]==="" || branch3[2]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }    
-                            <p>6</p>
-                        </div>
-                        <div className="branch">
-                            {branch3[3]==="" || branch3[3]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }    
-                            <p>7</p>
-                        </div>
+                        {branch3.map((branch,i)=>{
+                            return <div className="branch" title={branch} onClick={()=> generateData(branch)}>
+                                {branch==="" || branch===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }  
+                                <p>{i+4}</p>
+                            </div>
+                        })}
                     </div>
 
                     {/* {// branch line 4} */}
                     <div className="branchlane" style={{width: '88%'}}>
-                        <div className="branch">
-                            {branch4[0]==="" || branch4[0]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }      
-                            <p>8</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[1]==="" || branch4[1]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }     
-                            <p>9</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[2]==="" || branch4[2]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }     
-                            <p>10</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[3]==="" || branch4[3]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }     
-                            <p>11</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[4]==="" || branch4[4]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }       
-                            <p>12</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[5]==="" || branch4[5]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }       
-                            <p>13</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[6]==="" || branch4[6]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }       
-                            <p>14</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[7]==="" || branch4[7]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }       
-                            <p>15</p>
-                        </div>
+                        {branch4.map((branch, i)=>{
+                            return <div className="branch" title={branch} onClick={()=> generateData(branch)}>
+                                {branch==="" || branch===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }  
+                                <p>{i+8}</p>
+                            </div>
+                        })}
                     </div>
                     <div className="branchlane" style={{width: '85%'}}>
-                        <div className="branch">
-                            {branch4[0]==="" || branch4[0]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }     
-                            <p>16</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[1]==="" || branch4[1]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }     
-                            <p>17</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[2]==="" || branch4[2]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }     
-                            <p>18</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[3]==="" || branch4[3]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }     
-                            <p>19</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[4]==="" || branch4[4]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }     
-                            <p>20</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[5]==="" || branch4[5]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }     
-                            <p>21</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[6]==="" || branch4[6]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }     
-                            <p>22</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[7]==="" || branch4[7]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }     
-                            <p>23</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[8]==="" || branch4[8]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }  
-                            <p>24</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[9]==="" || branch4[9]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }  
-                            <p>25</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[10]==="" || branch4[10]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }  
-                            <p>26</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[11]==="" || branch4[11]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }  
-                            <p>27</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[12]==="" || branch4[12]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }  
-                            <p>28</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[13]==="" || branch4[13]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }  
-                            <p>29</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[14]==="" || branch4[14]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }  
-                            <p>30</p>
-                        </div>
-                        <div className="branch">
-                            {branch4[15]==="" || branch4[15]===undefined?<p className="p"></p>  :<p className="p"><img src={nodeR} alt="node-icon" /></p>  }  
-                            <p>31</p>
-                        </div>
+                        {branch5.map((branch, i)=>{
+                            return <div className="branch" title={branch} onClick={()=> generateData(branch)}>
+                                {branch==="" || branch===undefined?<p className="p"></p>  :<p className="p"><img src={nodeL} alt="node-icon" /></p>  }  
+                                <p>{i+16}</p>
+                            </div>
+                        })}
+                        
                     </div>
                 </div>
             </div>
