@@ -1,10 +1,57 @@
-import React from 'react';
-import {Btn} from '../Components';
+import React, { useContext, useEffect, useState } from 'react';
+import {Btn, UserContext} from '../Components';
 import nodeRoot from '../img/node_root.jpg';
 import nodeL from '../img/nodeL.jpg';
 import nodeR from '../img/nodeR.jpg';
+import { getUser } from '../utils';
 
 const Genealogy = () => {
+    const [tree, setTree] = useState({})
+    const user = useContext(UserContext)
+
+    useEffect(()=>{
+        generateData(user.userId)
+    },[user])
+
+    const generateData = (rootId) => {
+        const branch2 = []
+        const branch3 = []
+        const branch4 = []
+        const branch5 = []
+        getUser(rootId).then(user=>{
+            branch2.push(user.downlines.left)
+            branch2.push(user.downlines.right)
+        }).then(()=>{
+            branch2.forEach(id=>{
+                getUser(id).then(user=>{
+                    branch3.push(user.downlines.left)
+                    branch3.push(user.downlines.right)
+                })
+            })
+        }).then(()=>{
+            branch3.forEach(id=>{
+                getUser(id).then(user=>{
+                    branch4.push(user.downlines.left)
+                    branch4.push(user.downlines.right)
+                })
+            })
+        }).then(()=>{
+            branch4.forEach(id=>{
+                getUser(id).then(user=>{
+                    branch5.push(user.downlines.left)
+                    branch5.push(user.downlines.right)
+                })
+            })
+        })
+        setTree({
+            branch1: rootId,
+            branch2,
+            branch3,
+            branch4,
+            branch5,
+        })
+    }
+
     return (
         <div className="genealogy">
             <div className="treecontainer">
