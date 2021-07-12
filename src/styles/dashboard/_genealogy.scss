@@ -22,6 +22,10 @@
                     padding: .2rem 1.5rem;
                     overflow: hidden;
                     text-align: center;
+
+                    &  .p {
+                        height: 1rem;
+                    }
                     &  p {
                         font-size: .8rem;
                     }
