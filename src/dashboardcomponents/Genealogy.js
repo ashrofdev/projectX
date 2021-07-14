@@ -9,6 +9,7 @@ const Genealogy = () => {
     const user = useContext(UserContext)
 
     const [rootId, setRootId] = useState(user.userId)
+    const [downlines, setDownlines] = useState([])
     const [branch2, setBranch2] = useState(['',''])
     const [branch3, setBranch3] = useState(['','','',''])
     const [branch4, setBranch4] = useState(['','','','','','','',''])
@@ -85,6 +86,9 @@ const Genealogy = () => {
                         }).then(()=>{
                             if(count>=7){
                                 setBranch4(branch4i)
+                                setTimeout(() => {
+                                    getUsersFullDetails()
+                                }, 2000);
                             }
                             count+=2
                             console.log(branch4i,'iiiiiiiii')
@@ -112,6 +116,36 @@ const Genealogy = () => {
                     setBranch5(branch5i)
                 })
             })
+            
+    }
+
+    const getUsersFullDetails = () => {
+        const downlines = []
+        getUser(rootId).then(userDetails=>{
+            downlines.push(userDetails)
+        })
+        branch2.forEach(branch=>{
+            getUser(branch).then(userDetails=>{
+                downlines.push(userDetails)
+            })
+        })
+        branch3.forEach(branch=>{
+            getUser(branch).then(userDetails=>{
+                downlines.push(userDetails)
+            })
+        })
+        branch4.forEach(branch=>{
+            getUser(branch).then(userDetails=>{
+                downlines.push(userDetails)
+            })
+        })
+        branch5.forEach(branch=>{
+            getUser(branch).then(userDetails=>{
+                downlines.push(userDetails)
+            })
+        })
+
+        setDownlines(downlines)
     }
 
     return (
@@ -191,20 +225,16 @@ const Genealogy = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>JOHN DOE (NG000000)</td>
-                                <td>10</td>
-                                <td>8</td>
-                                <td>JOHN SMITH (NG000000)</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>JOHN DOE (NG000000)</td>
-                                <td>6</td>
-                                <td>2</td>
-                                <td>JOHN SMITH (NG000000)</td>
-                            </tr>
+                            {
+                                downlines.map((downline, i) =>
+                                <tr>
+                                    <td>{i+1}</td>
+                                    <td>{downline.lastname} {downline.firstname} ({downline.userId})</td>
+                                    <td>6</td>
+                                    <td>0</td>
+                                    <td>{downline.sponsorId}</td>
+                                </tr>)
+                            }
                         </tbody>
                     </table>
                 </div>
