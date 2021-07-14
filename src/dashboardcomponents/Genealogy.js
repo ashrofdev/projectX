@@ -52,6 +52,7 @@ const Genealogy = () => {
                 
         }).then(()=>{
             setBranch2(branch2i)
+            console.log(branch2)
             let count = 0
             branch2i.forEach((id)=>{
                 getUser(id).then(user=>{
@@ -82,16 +83,28 @@ const Genealogy = () => {
                                 branch4i.push(user.downlines.right)
                             }
         
+
                             
                         }).then(()=>{
                             if(count>=7){
                                 setBranch4(branch4i)
-                                setTimeout(() => {
-                                    getUsersFullDetails()
-                                }, 2000);
+                                
                             }
+                            branch4i.forEach(id=>{
+                                getUser(id).then(user=>{
+                                    if(user===undefined){
+                                        branch5i.push("")
+                                        branch5i.push("")
+                                    }else {
+                                        branch5i.push(user.downlines.left)
+                                        branch5i.push(user.downlines.right)
+                                    }
+                                    setBranch5(branch5i)
+
+                                })
+                            })
                             count+=2
-                            console.log(branch4i,'iiiiiiiii')
+                            getUsersFullDetails(branch2i,branch3i,branch4i,branch5i)
                         })
                     })
                 })
@@ -103,49 +116,47 @@ const Genealogy = () => {
         
             
         
-            branch4i.forEach(id=>{
-                getUser(id).then(user=>{
-                    if(user===undefined){
-                        branch5i.push("")
-                        branch5i.push("")
-                    }else {
-                        branch5i.push(user.downlines.left)
-                        branch5i.push(user.downlines.right)
-                    }
-
-                    setBranch5(branch5i)
-                })
-            })
+            
             
     }
 
-    const getUsersFullDetails = () => {
+    const getUsersFullDetails = async (branch2i,branch3i,branch4i,branch5i) => {
+        console.log(branch2i,branch3i,branch4i,branch5i)
         const downlines = []
-        getUser(rootId).then(userDetails=>{
-            downlines.push(userDetails)
-        })
-        branch2.forEach(branch=>{
-            getUser(branch).then(userDetails=>{
+            await getUser(rootId).then(userDetails=>{
                 downlines.push(userDetails)
+            }).then(()=>{
+                setDownlines(downlines)
             })
-        })
-        branch3.forEach(branch=>{
-            getUser(branch).then(userDetails=>{
-                downlines.push(userDetails)
+            branch2i.forEach(branch=>{
+                getUser(branch).then(userDetails=>{
+                    downlines.push(userDetails)
+                }).then(()=>{
+                    setDownlines(downlines)
+                })
             })
-        })
-        branch4.forEach(branch=>{
-            getUser(branch).then(userDetails=>{
-                downlines.push(userDetails)
+            branch3i.forEach(branch=>{
+                getUser(branch).then(userDetails=>{
+                    downlines.push(userDetails)
+                }).then(()=>{
+                    setDownlines(downlines)
+                })
             })
-        })
-        branch5.forEach(branch=>{
-            getUser(branch).then(userDetails=>{
-                downlines.push(userDetails)
+            branch4i.forEach(branch=>{
+                getUser(branch).then(userDetails=>{
+                    downlines.push(userDetails)
+                }).then(()=>{
+                    setDownlines(downlines)
+                })
             })
-        })
+            branch5i.forEach(branch=>{
+                getUser(branch).then(userDetails=>{
+                    downlines.push(userDetails)
+                }).then(()=>{
+                    setDownlines(downlines)
+                })
+            })
 
-        setDownlines(downlines)
     }
 
     return (
