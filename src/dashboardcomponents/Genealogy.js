@@ -357,8 +357,8 @@ const Genealogy = () => {
                                 <tr>
                                     <td>{i+1}</td>
                                     <td>{downline.lastname} {downline.firstname} ({downline.userId})</td>
-                                    <td>6</td>
-                                    <td>0</td>
+                                    <td>{downline.leftCount}</td>
+                                    <td>{downline.rightCount}</td>
                                     <td>{downline.sponsorId}</td>
                                 </tr>)
                             }
