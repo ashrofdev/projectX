@@ -19,9 +19,129 @@ const Genealogy = () => {
 
     useEffect(()=>{
         
-        generateData(rootId)
+        const getUsersFullDetails = async (branch2i,branch3i,branch4i,branch5i) => {
+            console.log(branch2i,branch3i,branch4i,branch5i)
+            const downlines = []
+                await getUser(rootId).then(userDetails=>{
+                    downlines.push(userDetails)
+                }).then(()=>{
+                    setDownlines(downlines)
+                })
+                branch2i.forEach(branch=>{
+                    getUser(branch).then(userDetails=>{
+                        downlines.push(userDetails)
+                    }).then(()=>{
+                        setDownlines(downlines)
+                    })
+                })
+                branch3i.forEach(branch=>{
+                    getUser(branch).then(userDetails=>{
+                        downlines.push(userDetails)
+                    }).then(()=>{
+                        setDownlines(downlines)
+                    })
+                })
+                branch4i.forEach(branch=>{
+                    getUser(branch).then(userDetails=>{
+                        downlines.push(userDetails)
+                    }).then(()=>{
+                        setDownlines(downlines)
+                    })
+                })
+                branch5i.forEach(branch=>{
+                    getUser(branch).then(userDetails=>{
+                        downlines.push(userDetails)
+                    }).then(()=>{
+                        setDownlines(downlines)
+                    })
+                })
+    
+        }
+
+        const generateData = async () => {
+        
+            const id = rootId
+            const branch2i = []
+            const branch3i = []
+            const branch4i = []
+            const branch5i = []
+            getUser(id).then(user=>{
+                if(user===undefined){
+                    branch2i.push("")
+                    branch2i.push("")
+                }else {
+                    branch2i.push(user.downlines.left)
+                    branch2i.push(user.downlines.right)
+                }
+               
+                
+                    
+            }).then(()=>{
+                setBranch2(branch2i)
+                let count = 0
+                branch2i.forEach((id)=>{
+                    getUser(id).then(user=>{
+                        if(user===undefined){
+                            branch3i.push("")
+                            branch3i.push("")
+                        }else {
+                            branch3i.push(user.downlines.left)
+                            branch3i.push(user.downlines.right)
+                        }
+                            
+                            console.log(branch3i,'mdmdmdmdmdmdmdmdmdm')
+                    }).then(()=>{
+                        if(count>=1){
+                            setBranch3(branch3i)
+                        }
+                        count+=1
+    
+                        //solving for 4th branch
+                        branch3i.forEach(id=>{
+    
+                            getUser(id).then(user=>{
+                                if(user===undefined){
+                                    branch4i.push("")
+                                    branch4i.push("")
+                                }else {
+                                    branch4i.push(user.downlines.left)
+                                    branch4i.push(user.downlines.right)
+                                }
+            
+    
+                                
+                            }).then(()=>{
+                                if(count>=7){
+                                    setBranch4(branch4i)
+                                    
+                                }
+                                branch4i.forEach(id=>{
+                                    getUser(id).then(user=>{
+                                        if(user===undefined){
+                                            branch5i.push("")
+                                            branch5i.push("")
+                                        }else {
+                                            branch5i.push(user.downlines.left)
+                                            branch5i.push(user.downlines.right)
+                                        }
+                                        setBranch5(branch5i)
+    
+                                    })
+                                })
+                                count+=2
+                                getUsersFullDetails(branch2i,branch3i,branch4i,branch5i)
+                            })
+                        })
+                    })
+                        
+                    
+                })
+            })
+                
+                   
+        }
+        generateData()
        
-        // setT('done')
     },[rootId])
 
     const regenerate = (topline) => {
@@ -104,7 +224,40 @@ const Genealogy = () => {
                                 })
                             })
                             count+=2
-                            getUsersFullDetails(branch2i,branch3i,branch4i,branch5i)
+                            const downlines = []
+                            getUser(rootId).then(userDetails=>{
+                                downlines.push(userDetails)
+                            }).then(()=>{
+                                setDownlines(downlines)
+                            })
+                            branch2i.forEach(branch=>{
+                                getUser(branch).then(userDetails=>{
+                                    downlines.push(userDetails)
+                                }).then(()=>{
+                                    setDownlines(downlines)
+                                })
+                            })
+                            branch3i.forEach(branch=>{
+                                getUser(branch).then(userDetails=>{
+                                    downlines.push(userDetails)
+                                }).then(()=>{
+                                    setDownlines(downlines)
+                                })
+                            })
+                            branch4i.forEach(branch=>{
+                                getUser(branch).then(userDetails=>{
+                                    downlines.push(userDetails)
+                                }).then(()=>{
+                                    setDownlines(downlines)
+                                })
+                            })
+                            branch5i.forEach(branch=>{
+                                getUser(branch).then(userDetails=>{
+                                    downlines.push(userDetails)
+                                }).then(()=>{
+                                    setDownlines(downlines)
+                                })
+                            })
                         })
                     })
                 })
@@ -120,44 +273,7 @@ const Genealogy = () => {
             
     }
 
-    const getUsersFullDetails = async (branch2i,branch3i,branch4i,branch5i) => {
-        console.log(branch2i,branch3i,branch4i,branch5i)
-        const downlines = []
-            await getUser(rootId).then(userDetails=>{
-                downlines.push(userDetails)
-            }).then(()=>{
-                setDownlines(downlines)
-            })
-            branch2i.forEach(branch=>{
-                getUser(branch).then(userDetails=>{
-                    downlines.push(userDetails)
-                }).then(()=>{
-                    setDownlines(downlines)
-                })
-            })
-            branch3i.forEach(branch=>{
-                getUser(branch).then(userDetails=>{
-                    downlines.push(userDetails)
-                }).then(()=>{
-                    setDownlines(downlines)
-                })
-            })
-            branch4i.forEach(branch=>{
-                getUser(branch).then(userDetails=>{
-                    downlines.push(userDetails)
-                }).then(()=>{
-                    setDownlines(downlines)
-                })
-            })
-            branch5i.forEach(branch=>{
-                getUser(branch).then(userDetails=>{
-                    downlines.push(userDetails)
-                }).then(()=>{
-                    setDownlines(downlines)
-                })
-            })
-
-    }
+    
 
     return (
         <div className="genealogy">
